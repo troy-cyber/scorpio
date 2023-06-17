@@ -261,7 +261,22 @@ def writeScores(
 
 vulns = []
 
-# --------------------------------------------- ADD VULNS HERE ---------------------------------------------
+'''
+Add your vulns here, below is some sample code you can edit
+
+vulns.append(newCommandObject('cat /home/kaisa/Desktop/Forensics_1.txt'
+             , 'Valoran City Park', True, 6,
+             'Forensics Question 1 correct'))
+vulns.append(newCommandObject('cat /etc/passwd | grep -v "#" | grep zoe | wc -l'
+             , '1', False, 2, 'Removed unauthorized user zoe'))
+vulns.append(newCommandObject('cat /etc/shadow | grep lux',
+             '$6$lpSQPhyvEux4vqN7$5CcsHwirFEhvgFqT8sAojdISP/9wGfdCjHfMZ1aH3xkUV4ze3tQtsyOYYB7bbPYylgcjD86hOuNu08nIAu1Un0:19170'
+             , False, 2, 'Changed insecure password for lux'))
+vulns.append(newCommandObject('apt list --installed goldeneye',
+             'installed', False, 2,
+             'Prohibited software goldeneye removed'))
+
+'''
 
 
 # checking vulns
