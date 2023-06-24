@@ -15,12 +15,12 @@ vulns.append(newCommandObject('cat /home/kim/Desktop/Forensics_1.txt', 'answer',
 ```
 ### Added a user
 ```python
-vulns.append(newCommandObject('cat /etc/passwd', 'kim', True, 2, 'Created user kim'))
+vulns.append(newCommandObject('cat /etc/passwd | grep -w kim | wc -l', '1', True, 2, 'Created user kim'))
 ```
 ### Removed a user
 > hidden or otherwise
 ```python
-vulns.append(newCommandObject('cat /etc/passwd | grep -v "#" | grep kim | wc -l', '1', False, 2, 'Removed user kim'))
+vulns.append(newCommandObject('cat /etc/passwd | grep -v "#" | grep -w kim | wc -l', '0', True, 2, 'Removed user kim'))
 ```
 ### Added a user to sudo group
 ```python
