@@ -1,12 +1,14 @@
 # cybersec-educational-tools
-This project contains a scoring engine for Ubuntu OS. The scoring engine checks to see if a student has caught certain vulnerabilities on the system and provides real-time feedback on student progress. For example, if the firewall is off, then the scoring engine will reward points to the student if they turn it back on. This allows students to gain hands-on experience at securing everything from web servers to standalone workstations. 
+This is a scoring engine for the Ubuntu OS in the vein of the scoring engine from the CyberPatriot competition. It checks to see if a student has found vulnerabilities on the system and provides real-time feedback. 
+
+For example, the scoring engine will reward points to the student if they turn on the firewall. This allows students to gain hands-on experience at securing everything from web servers to standalone workstations. 
 
 ## How it works:
-The teacher implements a list of vulnerabilities on a virtual machine and records them in engine.py, which will run every 30 seconds. As the student secures the system, the scoring engine will update Template.html to display a list of the vulnerabilites that the student caught correctly. The student is finished when they reach all 100 points or when the teacher calls time. 
+The teacher implements a list of vulnerabilities on a virtual machine and records them in `engine.py`, which will run every 30 seconds. As the student secures the system, the scoring engine will update `Template.html` to display a list of the vulnerabilites that the student found correctly. The student is finished when they reach all 100 points or when the teacher calls time. 
 
 #### Instructions
 
-    on the desktop, create a file called "Set Name for Scoring Report" and inside, write the exact words YOUR FULL NAME: [id]
+    On the desktop, create a file called "Set Name for Scoring Report" and inside, write the exact words YOUR FULL NAME: [id]
     mkdir /opt/temp and then copy cp_logo.jpeg, tts.jpg, engine.py, Template.html, time.txt into /opt/temp/ a) Make sure the permissions on /opt/temp and the contents inside are owned by the standard user that the competitor is intended to use(not root or anyone else). Make /opt/temp readable to that standard user: chmod u+r /opt/temp/* /opt/temp
     install python2 (yes this runs in python2 NOT python3), python-pip, git
     pip install requests (and any other libraries needed by engine.py)
@@ -17,13 +19,16 @@ The teacher implements a list of vulnerabilities on a virtual machine and record
     input any vulns using vulns.append([specific vuln]). The template provides an example of how to do this
     compile the code using pyconcrete or cython
 
-pyconcrete guide: https://pypi.org/project/pyconcrete/
+[pyconcrete guide](https://pypi.org/project/pyconcrete/)
+```bash
 git clone <pyconcrete repo> <pyconcre dir>	
+```
 install pyconcrete
+```bash
 python setup.py install
 pyconcrete-admin.py compile --source=/opt/temp --pye
 pyconcrete engine.pye
-
+```
     keep the .pye file, but remove the .py files (once everything is tested). From this point on, the way to run the scoring engine will be pyconcrete engine.pye
     create a service for the scoring engine (instructions below)
     run the engine at least once to create ScoringReport.html and then create a symlink (ln -s /opt/temp/ScoringReport.html /home/$USER/Desktop/ScoringReport.html)
@@ -34,6 +39,7 @@ pyconcrete engine.pye
 
 create file /lib/systemd/system/engine.service add below into it
 
+```bash
 [Unit]
 Description=Scoring Engine
 After=network.target
@@ -48,10 +54,14 @@ ExecStart=(path to pyconcrete cmd) /opt/temp/engine.pye
 
 [Install]
 WantedBy=multi-user.target
-
+```
 #### Testing the scoring engine
-
+```bash
     systemctl daemon-reload
     systemctl enable engine
     reboot
     systemctl status engine
+```
+## More Resources
+
+A good resource for using this engine and encrypting the python engine is this [blog](https://xenonminer.github.io/2023/06/15/scorpio_linux_setup/).
