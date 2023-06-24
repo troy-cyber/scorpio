@@ -35,8 +35,7 @@ Add vulns using:
 ```python
 vulns.append([specific vuln])
 ```
-
-> The template provides an example of how to do this
+The template file [here](vuln_documentation.md) gives some examples how.
 
 Compile the code using [pyconcrete](https://pypi.org/project/pyconcrete/) or cython.
 
