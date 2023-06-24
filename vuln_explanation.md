@@ -15,7 +15,7 @@ vulns.append(newCommandObject('cat /home/kim/Desktop/Forensics_1.txt', 'answer',
 ```
 ### Added a user
 ```python
-vulns.append(newCommandObject('cat /etc/passwd', 'kim', True, 2, 'Created user ahri'))
+vulns.append(newCommandObject('cat /etc/passwd', 'kim', True, 2, 'Created user kim'))
 ```
 ### Removed a user
 > hidden or otherwise
@@ -24,11 +24,11 @@ vulns.append(newCommandObject('cat /etc/passwd | grep -v "#" | grep kim | wc -l'
 ```
 ### Added a user to sudo group
 ```python
-vulns.append(newCommandObject('cat /etc/group | grep 27', 'kim', True, 2, 'Added kim to "sudo" group'))
+vulns.append(newCommandObject('cat /etc/group | grep -v "#" | grep -w sudo', 'kim', True, 2, 'Added kim to "sudo" group'))
 ```
 ### Removed a user from sudo group
 ```python
-vulns.append(newCommandObject('cat /etc/group | grep -v "#" | grep shadow | grep kim | wc -l', '1', False, 2, 'Removed kim from shadow group'))
+vulns.append(newCommandObject('cat /etc/group | grep -v "#" | grep -w sudo | grep -w kim | wc -l', '1', False, 2, 'Removed kim from sudo group'))
 ```
 ### Changed password for user
 ```python
@@ -36,7 +36,7 @@ vulns.append(newCommandObject('cat /etc/shadow | grep kim', '$6$5asdf23qfsdASDAS
 ```
 ### Removed file
 ```python
-vulns.append(newCommandObject('ls /var/log', 'music.mp4',False, 3, 'Prohibited file has been removed'))
+vulns.append(newCommandObject('ls /var/log', 'music.mp4', False, 3, 'Prohibited file has been removed'))
 ```
 ### Firewall is enabled
 ```python
