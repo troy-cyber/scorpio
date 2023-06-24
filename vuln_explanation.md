@@ -34,6 +34,14 @@ vulns.append(newCommandObject('cat /etc/group | grep -v "#" | grep -w sudo | gre
 ```python
 vulns.append(newCommandObject('cat /etc/shadow | grep kim', '$6$5asdf23qfsdASDASDas32asdf232MOQWDKUn5x23423awwfasdk2cvgc2342afsdAgliwid2HAQX.snudnxSRPePZ0:192328', False, 2, 'Changed password for kim'))
 ```
+### Changed user's shell to a valid one
+```python
+vulns.append(newCommandObject('cat /etc/passwd | grep -v "#" | grep -w kim | grep sh | wc -l', '1', True, 2, 'Changed kim\'s shell to a valid one'))
+```
+### Changed user's shell to a invalid one
+```python
+vulns.append(newCommandObject('cat /etc/passwd | grep -v "#" | grep -w kim | grep sh | wc -l', '0', True, 2, 'User kim does not have a valid shell'))
+```
 ### Removed file
 ```python
 vulns.append(newCommandObject('ls /var/log', 'music.mp4', False, 3, 'Prohibited file has been removed'))
