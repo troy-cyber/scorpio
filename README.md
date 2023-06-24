@@ -8,18 +8,38 @@ The teacher implements a list of vulnerabilities on a virtual machine and record
 
 #### Instructions
 
-    On the desktop, create a file called "Set Name for Scoring Report" and inside, write the exact words YOUR FULL NAME: [id]
-    mkdir /opt/temp and then copy cp_logo.jpeg, tts.jpg, engine.py, Template.html, time.txt into /opt/temp/ a) Make sure the permissions on /opt/temp and the contents inside are owned by the standard user that the competitor is intended to use(not root or anyone else). Make /opt/temp readable to that standard user: chmod u+r /opt/temp/* /opt/temp
-    install python2 (yes this runs in python2 NOT python3), python-pip, git
-    pip install requests (and any other libraries needed by engine.py)
-    forensics questions are to be named in the following format: "/home/[username]/Desktop/Forensics_[#]” ex: /home/mando/Desktop/Forensics_1
-    in engine.py, change the variables imageName, imageUserName to whatever you want
-    note: for users who are intended to have poor passwords, create them using useradd instead of adduser ex: if points are to be awarded for changing the password of user bob, create the user bob using useradd rather than adduser
-    note: AVOID USING SPACES IN ANY FILENAMES. ex: make a “this_is_a_vuln.mp3” instead of “this is a vuln.mp3”
-    input any vulns using vulns.append([specific vuln]). The template provides an example of how to do this
-    compile the code using pyconcrete or cython
+On the desktop, create a file named `Set Name for Scoring Report` and write inside: `YOUR FULL NAME: [id]`.
 
-[pyconcrete guide](https://pypi.org/project/pyconcrete/)
+Make the directory `/opt/temp` and then copy `cp_logo.jpeg`, `tts.jpg`, `engine.py`, `Template.html`, and `time.txt` into `/opt/temp/`. Make sure the permissions on `/opt/temp` and the contents inside are owned by the standard user that the competitor is intended to use (not root or anyone else). 
+    
+Make `/opt/temp` readable to that standard user:
+```bash
+chmod u+r /opt/temp/* /opt/temp
+```
+Install `python2`, `python-pip`, and `git`.
+
+> yes this runs in python2 **NOT** python3
+
+Use to pip to install requests (and any other libraries needed by `engine.py`).
+
+Forensics questions should be named like: `/home/[username]/Desktop/Forensics_[#]`
+
+> Example: `/home/mando/Desktop/Forensics_1`
+
+In `engine.py`, change the variables `imageName`, `imageUserName` to whatever you want.
+> for users who are intended to have poor passwords, create them using `useradd` instead of `adduser`.
+
+> AVOID USING SPACES IN ANY FILENAMES. For example, `this_is_a_vuln.mp3` instead of `this is a vuln.mp3`.
+
+Add vulns using:
+```python
+vulns.append([specific vuln])
+```
+
+> The template provides an example of how to do this
+
+Compile the code using [pyconcrete](https://pypi.org/project/pyconcrete/) or cython.
+
 ```bash
 git clone <pyconcrete repo> <pyconcre dir>	
 ```
@@ -29,15 +49,22 @@ python setup.py install
 pyconcrete-admin.py compile --source=/opt/temp --pye
 pyconcrete engine.pye
 ```
-    keep the .pye file, but remove the .py files (once everything is tested). From this point on, the way to run the scoring engine will be pyconcrete engine.pye
-    create a service for the scoring engine (instructions below)
-    run the engine at least once to create ScoringReport.html and then create a symlink (ln -s /opt/temp/ScoringReport.html /home/$USER/Desktop/ScoringReport.html)
-    important: CLEAR HISTORY, create aliases in /root/.bashrc and /home/$USER/.bashrc with the line export HISTFILE=/dev/null
-    also very important: REMOVE engine.py FROM THE ENTIRE SYSTEM (ex: make sure it's not in your trashbin). Would defeat the point of compiling everything if the competitor can find the decompiled version somewhere with all the vulns
+    
+To use pyconcrete, keep the `.pye` file, but remove the `.py` files (once everything is tested). From this point on, the way to run the scoring engine will be `pyconcrete engine.pye`.
+
+Now, create a service for the scoring engine (instructions below). Run the engine at least once to create `ScoringReport.html` and then create a symlink:
+```bash
+ln -s /opt/temp/ScoringReport.html /home/$USER/Desktop/ScoringReport.html)
+```
+Also, we need to clear history. To do that we create aliases in `/root/.bashrc` and `/home/$USER/.bashrc` with the line `export HISTFILE=/dev/null`
+
+We also need to REMOVE `engine.py` FROM THE ENTIRE SYSTEM (ex: make sure it's not in your trashbin). 
+
+> It would defeat the point of compiling if one can find the decompiled version somewhere with the vulns, wouldn't it?
 
 #### Setting up the scoring engine
 
-create file /lib/systemd/system/engine.service add below into it
+create file `/lib/systemd/system/engine.service` add below into it
 
 ```bash
 [Unit]
