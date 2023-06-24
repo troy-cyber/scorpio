@@ -1,4 +1,4 @@
-# cybersec-educational-tools
+# Scorpio
 This is a scoring engine for the Ubuntu OS in the vein of the scoring engine from the CyberPatriot competition. It checks to see if a student has found vulnerabilities on the system and provides real-time feedback. 
 
 For example, the scoring engine will reward points to the student if they turn on the firewall. This allows students to gain hands-on experience at securing everything from web servers to standalone workstations. 
