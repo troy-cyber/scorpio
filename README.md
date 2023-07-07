@@ -3,11 +3,14 @@ This is a scoring engine for the Ubuntu OS in the vein of the scoring engine fro
 
 For example, the scoring engine will reward points to the student if they turn on the firewall. This allows students to gain hands-on experience at securing everything from web servers to standalone workstations. 
 
+The Windows-equivalent can be found [here](https://github.com/troy-cyber/windows-scorpio)
+
 ## How it works:
 The teacher implements a list of vulnerabilities on a virtual machine and records them in `engine.py`, which will run every 30 seconds. As the student secures the system, the scoring engine will update `Template.html` to display a list of the vulnerabilites that the student found correctly. The student is finished when they reach all 100 points or when the teacher calls time. 
 
 #### Instructions
 
+Here's a [better formatted version](https://xenonminer.github.io/2023/06/15/scorpio_linux_setup/) of this explanation.
 On the desktop, create a file named `Set Name for Scoring Report` and write inside: `YOUR FULL NAME: [id]`.
 
 Make the directory `/opt/temp` and then copy `cp_logo.jpeg`, `tts.jpg`, `engine.py`, `Template.html`, and `time.txt` into `/opt/temp/`. Make sure the permissions on `/opt/temp` and the contents inside are owned by the standard user that the competitor is intended to use (not root or anyone else). 
@@ -88,6 +91,3 @@ WantedBy=multi-user.target
     reboot
     systemctl status engine
 ```
-## More Resources
-
-A good resource for using this engine and encrypting the python engine is this [blog](https://xenonminer.github.io/2023/06/15/scorpio_linux_setup/).
