@@ -11,6 +11,7 @@ The teacher implements a list of vulnerabilities on a virtual machine and record
 #### Instructions
 
 Here's a [better formatted version](https://xenonminer.github.io/2023/06/15/scorpio_linux_setup/) of this explanation.
+
 On the desktop, create a file named `Set Name for Scoring Report` and write inside: `YOUR FULL NAME: [id]`.
 
 Make the directory `/opt/temp` and then copy `cp_logo.jpeg`, `tts.jpg`, `engine.py`, `Template.html`, and `time.txt` into `/opt/temp/`. Make sure the permissions on `/opt/temp` and the contents inside are owned by the standard user that the competitor is intended to use (not root or anyone else). 
